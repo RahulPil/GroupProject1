@@ -4,18 +4,20 @@ public class Item {
 	private String name;
 	private double price; 
 	private double discount;
+	public int bulkCount;
 	
 	//CONSTRUCTORS
 	public Item() {
-		this("",0,0);
+		this("",0,0,0);
 	}
-    public Item(String name, double price, double discount) {
+    public Item(String name, double price, double discount, int bulkCount) {
 		this.name = name; 
 		this.price = price;
 		this.discount = discount;
+		this.bulkCount = bulkCount;
 	}
     public Item(String name, double price) {
-    	this(name,price,0);
+    	this(name,price,0,0);
     }
     
     //SETTERS
@@ -28,18 +30,24 @@ public class Item {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
+	public void setBulkCount(int bulkCount) {
+		this.bulkCount = bulkCount;
+	}
 	
 	//GETTERS
 	public String getName() {
-		return this.name;
+		return name;
 	}
 	public double getPrice() {
-		return this.price;
+		return price;
 	}
 	public double getDiscount() {
-		return this.discount;
+		return discount;
 	}
 	public double getDiscountedPrice() {
 		return this.price - this.discount;
+	}
+	public int getBulkCount() {
+		return bulkCount;
 	}
 }

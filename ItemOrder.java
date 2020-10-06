@@ -11,5 +11,39 @@ Methods to implement:
 */ 
 
 public class ItemOrder {
-
+	private Item item;
+	private int count;
+	
+	//CONSTRUCTORS
+	ItemOrder(Item item, int count) {
+		this.item = item;
+		this.count = count;
+	}
+	ItemOrder(Item item) {
+		this(item, 1);
+	}
+	
+	//SETTERS
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	//GETTERS
+	public Item getItem() {
+		return item;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public double getOrderCost() {
+		if(item.getBulkCount() <= count) return item.getDiscountedPrice()*count;
+		return item.getPrice()*count;
+	}
+	
 }
