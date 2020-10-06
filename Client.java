@@ -1,12 +1,26 @@
+//make a loop that takes what the user wants 
+//loop exits when keyword is pressed 
+//prints out the reciept which includes total, price, and items. 
 
+
+import java.util.*;
 public class Client {
 
-	public Client() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("This is a trail");
+
+		while(scan.nextLine() != "exit"){
+			String input = scan.nextLine();
+			System.out.println("You have entered " +input);
+
+	
+		}
+		System.out.println("You have exited");
+		
+		
 
 	}
 
