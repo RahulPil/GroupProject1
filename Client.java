@@ -25,7 +25,8 @@ public class Client {
 		System.out.println("Welcome to the grocery!");
 		System.out.println("Type 'exit' when you are done with entering items for purchase.");
 		System.out.println("--------------");
-		while(scan.nextLine() != "exit"){
+		String input = "";
+		while(input.equals("exit") == false){
 			String userinput = scan.nextLine();
 			String input = userinput.toLowerCase();
 			System.out.println("You have entered: " + input);
@@ -60,14 +61,8 @@ public class Client {
 				itemsList.add(zucchini.getName());
 				break;
 			}
-                     
-			
-
 		}
 		System.out.println("You have exited");
-		
 		scan.close();
-
 	}
-
 }
