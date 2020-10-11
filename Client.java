@@ -114,6 +114,16 @@ public class Client {
             System.out.println("invalid input");
             
          }
+			/*     private static void discountChecker(ArrayList<String> itemsList) {
+        int apple = Collections.frequency(itemsList, "apple");//checks to see how many "apples" there are
+        discountGiver(apple);
+        System.out.println("This is how many apples you have"+ apple);
+        int banana=Collections.frequency(itemsList, "banana");
+        int broccoli=Collections.frequency(itemsList, "broccoli");
+        int carrots=Collections.frequency(itemsList, "carrots");
+        int oatmeal=Collections.frequency(itemsList, "oatmeal");
+        int potato=Collections.frequency(itemsList, "potato");
+        int zucchini=Collections.frequency(itemsList, "zucchini"); */
          
 		}
       System.out.println("You have exited");
