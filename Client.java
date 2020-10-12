@@ -1,10 +1,10 @@
 //make a loop that takes what the user wants 
 //loop exits when keyword is pressed 
 //prints out the reciept which includes total, price, and items. 
-
-
+package teamProject1;
 import java.util.*;
 public class Client {
+	//This class just stores the item orders in an array list 
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -19,27 +19,26 @@ public class Client {
 		Item potato = new Item("potato", 0.40, 0.05, 9);
 		Item zucchini = new Item("zucchini", 0.76, 0.05, 5);
 
-		System.out.println("");
-		
+		System.out.println("");	
 		
 		System.out.println("Welcome to the grocery!");
 		System.out.println("Type 'exit' when you are done with entering items for purchase.");
 		System.out.println("--------------");
 		String input = "";
 		while(input.equals("exit") == false){
-         System.out.print("input: ");
-			String userinput = scan.nextLine();
-			input = userinput.toLowerCase();
-			System.out.println("You have entered: " + input);
+         System.out.print("What the fuck do you want: ");
+         String userinput = scan.nextLine();
+         input = userinput.toLowerCase();
+			//System.out.println("You have entered: " + input);
          
          //itemsList.add(input);
 			if (input.equals("add")){
-            System.out.print("enter in item name: ");
+			System.out.print("enter in item name: ");
             userinput = scan.nextLine();
 			   input = userinput.toLowerCase();
-            System.out.println("You have entered: " + (input));
+            //System.out.println("You have entered: " + (input));
    			   switch(input){
-   				case "apple":
+   				case "apple":   					
    				itemsList.add(apple.getName());
    				break;
    
@@ -51,8 +50,8 @@ public class Client {
    				itemsList.add(broccoli.getName());
    				break;
    
-   				case "carrots":
-   				itemsList.add(carrots.getName());
+   				case "carrot":
+   				itemsList.add(carrot.getName());
    				break;
    
    				case "oatmeal":
@@ -60,7 +59,7 @@ public class Client {
    				break;
    
    				case "potato":
-   				itemsList.add(potatos.getName());
+   				itemsList.add(potato.getName());
    				break;
    
    				case "zucchini":
@@ -72,7 +71,7 @@ public class Client {
             System.out.print("enter in item name: ");
             userinput = scan.nextLine();
 			   input = userinput.toLowerCase();
-            System.out.println("You have entered: " + (input));
+           // System.out.println("You have entered: " + (input));
             switch(input){
    				case "apple":
    				itemsList.remove(apple.getName());
@@ -86,8 +85,8 @@ public class Client {
    				itemsList.remove(broccoli.getName());
    				break;
    
-   				case "carrots":
-   				itemsList.remove(carrots.getName());
+   				case "carrot":
+   				itemsList.remove(carrot.getName());
    				break;
    
    				case "oatmeal":
@@ -95,14 +94,13 @@ public class Client {
    				break;
    
    				case "potato":
-   				itemsList.remove(potatos.getName());
+   				itemsList.remove(potato.getName());
    				break;
    
    				case "zucchini":
    				itemsList.remove(zucchini.getName());
    				break; 
-            }
-               
+            }               
          }
          else if (input == "stocklist"){
             System.out.println("stock: ");
@@ -131,6 +129,38 @@ public class Client {
       System.out.println("Recipt:");
       System.out.println(itemsList);
       
+      
 		scan.close();
+		discountChecker(itemsList);
 	}
+	
+	private static void discountGiver(int item) {
+        if(item >=2){
+            System.out.println("You get a discount of $2!");
+        }
+    }
+  public static void discountChecker(ArrayList<String> itemsList) {
+	 
+    int apple = Collections.frequency(itemsList, "apple");//checks to see how many "apples" there are
+    discountGiver(apple);
+    System.out.println("Number of Apples: "+ apple);
+    int banana=Collections.frequency(itemsList, "banana");
+    discountGiver(banana);
+    System.out.println("Number of Banana: "+ banana);
+    int broccoli=Collections.frequency(itemsList, "broccoli");
+    discountGiver(broccoli);
+    System.out.println("Number of Broccoli: "+ broccoli);
+    int carrot=Collections.frequency(itemsList, "carrot");
+    discountGiver(carrot);
+    System.out.println("Number of Carrots: "+ carrot);
+    int oatmeal=Collections.frequency(itemsList, "oatmeal");
+    discountGiver(oatmeal);
+    System.out.println("Number of Oatmeal: "+ oatmeal);
+    int potato=Collections.frequency(itemsList, "potato");
+    discountGiver(potato);
+    System.out.println("Number of Potato: "+ potato);
+    int zucchini=Collections.frequency(itemsList, "zucchini"); 
+    discountGiver(zucchini);
+    System.out.println("Number of Zucchini: "+ zucchini);
+  }    
 }
