@@ -3,157 +3,104 @@
 //prints out the reciept which includes total, price, and items. 
 
 
-package teamProject1;
 import java.util.*;
 public class Client {
-	//This class just stores the item orders in an array list 
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		ArrayList<String> itemsList = new ArrayList<String>();
+		ArrayList<ItemOrder> receipt = new ArrayList<ItemOrder>();
+		Set<Item> stock = new HashSet<Item>();
 		
-		// create 8-10 Item objects
-		Item apple = new Item("apple", 3.99, 0.50, 2);
-		Item banana = new Item("banana", 3.49, 0.25, 2);
-		Item broccoli = new Item("broccoli", 1.89, 0.20, 5);
-		Item carrot = new Item("carrot", 0.99, 0.15, 4);
-		Item oats = new Item("oats", 8.99, 0.99, 4);
-		Item potato = new Item("potato", 0.40, 0.05, 9);
-		Item zucchini = new Item("zucchini", 0.76, 0.05, 5);
+		// create 8 Item objects and adds them to the stock Set
+		stock.add(new Item("Apple", 3.99, 0.50, 2));
+		stock.add(new Item("Banana", 3.49, 0.25, 2));
+		stock.add(new Item("Broccoli", 1.89, 0.20, 5));
+		stock.add(new Item("Carrot", 0.99, 0.15, 4));
+		stock.add(new Item("Oats", 8.99, 0.99, 4));
+		stock.add(new Item("Potato", 0.40, 0.05, 9));
+		stock.add(new Item("Zucchini", 0.76, 0.05, 5));
+		stock.add(new Item("Orange", 0.49, .05, 6));
 
-		System.out.println("");	
+		System.out.println();
 		
 		System.out.println("Welcome to the grocery!");
+		System.out.println("To add items type 'add' and follow the prompts.");
+		System.out.println("To remove items type 'remove' and follow the prompts.");
+		System.out.println("To view the stock, type 'stocklist'.");
+		System.out.println("To view your cart, type 'cart'.");
 		System.out.println("Type 'exit' when you are done with entering items for purchase.");
 		System.out.println("--------------");
-		String input = "";
-		while(input.equals("exit") == false){
-         System.out.print("What the fuck do you want: ");
-         String userinput = scan.nextLine();
-         input = userinput.toLowerCase();
-			//System.out.println("You have entered: " + input);
-         
-         //itemsList.add(input);
-			if (input.equals("add")){
-			System.out.print("enter in item name: ");
-            userinput = scan.nextLine();
-			   input = userinput.toLowerCase();
-            //System.out.println("You have entered: " + (input));
-   			   switch(input){
-   				case "apple":   					
-   				itemsList.add(apple.getName());
-   				break;
-   
-   				case "banana":
-   				itemsList.add(banana.getName());
-   				break;
-   
-   				case "broccoli":
-   				itemsList.add(broccoli.getName());
-   				break;
-   
-   				case "carrot":
-   				itemsList.add(carrot.getName());
-   				break;
-   
-   				case "oatmeal":
-   				itemsList.add(oats.getName());
-   				break;
-   
-   				case "potato":
-   				itemsList.add(potato.getName());
-   				break;
-   
-   				case "zucchini":
-   				itemsList.add(zucchini.getName());
-   				break; 
-            }
+		System.out.println("Currently in stock: " + stock);
+		String input = scan.next();
+		while(!input.equals("exit")){
+			//handles adding new items to receipt
+			if (input.equalsIgnoreCase("add")) {
+				System.out.println("What would you like to add? ");
+				input = scan.next();
+				boolean found = false; //tracks whether or not the item is in stock
+				for (Item food : stock) {
+					if (food.getName().equalsIgnoreCase(input)) {
+						found = true;
+						System.out.println("How many would you like to add? ");
+						int count = scan.nextInt();
+						boolean inOrder = false; //tracks whether or not the item has already been ordered
+						for (ItemOrder order : receipt) { //searches the receipt for previous orders of the same item
+							if (order.getItem().getName().equalsIgnoreCase(input)) {
+								order.setCount(order.getCount()+count); //updates previous orders with new count
+								inOrder = true;
+							}
+						}
+						if (!inOrder) receipt.add(new ItemOrder(food,count));
+						System.out.println("Added " + count + " " + input + ". Add or remove more items? ");
+					}
+				}
+				if (!found) System.out.println("Invalid input, food not found. Add or remove more items? ");
 			}
-         else if (input.equals("remove")){
-            System.out.print("enter in item name: ");
-            userinput = scan.nextLine();
-			   input = userinput.toLowerCase();
-           // System.out.println("You have entered: " + (input));
-            switch(input){
-   				case "apple":
-   				itemsList.remove(apple.getName());
-   				break;
-   
-   				case "banana":
-   				itemsList.remove(banana.getName());
-   				break;
-   
-   				case "broccoli":
-   				itemsList.remove(broccoli.getName());
-   				break;
-   
-   				case "carrot":
-   				itemsList.remove(carrot.getName());
-   				break;
-   
-   				case "oatmeal":
-   				itemsList.remove(oats.getName());
-   				break;
-   
-   				case "potato":
-   				itemsList.remove(potato.getName());
-   				break;
-   
-   				case "zucchini":
-   				itemsList.remove(zucchini.getName());
-   				break; 
-            }               
-         }
-         else if (input == "stocklist"){
-            System.out.println("stock: ");
-            
-            break;
-         }
-         
-         else{
-            System.out.println("invalid input");
-            
-         }
-			
-         
+			//handles removing items from receipt
+			else if (input.equalsIgnoreCase("remove")) {
+				System.out.println("What would you like to remove? ");
+				input = scan.next();
+				boolean found = false; //tracks whether or not the item has already been ordered
+				for (ItemOrder order : receipt) {
+					if (order.getItem().getName().equalsIgnoreCase(input)) {
+						found = true;
+						System.out.println("How many would you like to remove? ");
+						int count = scan.nextInt();
+						order.setCount(Math.max(order.getCount()-count,0)); //removes the given count from the previous order, with a minimum count of 0
+						System.out.println("Removed " + count + " " + input + ". Add or remove more items? ");
+					}
+				}
+				if (!found) System.out.println("Invalid input, food not found. Add or remove more items? ");
+			}
+			//prints out available options
+			else if (input.equalsIgnoreCase("stocklist")){
+				System.out.println("Stock: " + stock);
+			}
+			else if (input.equalsIgnoreCase("cart")) {
+				System.out.println("Cart: " + receipt);
+			}
+			else if (input.equalsIgnoreCase("exit")) break;
+			else {
+				System.out.println("Invalid input. Add or remove more items? ");
+			}
+			input = scan.next();
 		}
-      System.out.println("You have exited");
-      System.out.println();
-      System.out.println("Recipt:");
-      System.out.println(itemsList);
-      
-      
 		scan.close();
-		discountChecker(itemsList);
+		
+		System.out.println();
+		System.out.println("You have exited.");
+		System.out.println();
+		System.out.println("You purchased: ");
+		double total = 0.0;
+		for(ItemOrder order : receipt) {
+			int itemCount = order.getCount();
+			if (itemCount > 0) { //prints each item purchased, with the count and total item cost displayed
+				if (itemCount >= order.getItem().bulkCount) total += order.getItem().getDiscountedPrice()*itemCount;
+				else total += order.getItem().getPrice();
+				System.out.printf(order.getItem().getName() + "(" + itemCount + "): $%.2f", itemCount * order.getItem().getDiscountedPrice());
+				System.out.println();
+			}
+		}
+		System.out.printf("Total cost: $%.2f", total);
 	}
-	
-	private static void discountGiver(int item) {
-        if(item >=2){
-            System.out.println("You get a discount of $2!");
-        }
-    }
-  public static void discountChecker(ArrayList<String> itemsList) {
-	 
-    int apple = Collections.frequency(itemsList, "apple");//checks to see how many "apples" there are
-    discountGiver(apple);
-    System.out.println("Number of Apples: "+ apple);
-    int banana=Collections.frequency(itemsList, "banana");
-    discountGiver(banana);
-    System.out.println("Number of Banana: "+ banana);
-    int broccoli=Collections.frequency(itemsList, "broccoli");
-    discountGiver(broccoli);
-    System.out.println("Number of Broccoli: "+ broccoli);
-    int carrot=Collections.frequency(itemsList, "carrot");
-    discountGiver(carrot);
-    System.out.println("Number of Carrots: "+ carrot);
-    int oatmeal=Collections.frequency(itemsList, "oatmeal");
-    discountGiver(oatmeal);
-    System.out.println("Number of Oatmeal: "+ oatmeal);
-    int potato=Collections.frequency(itemsList, "potato");
-    discountGiver(potato);
-    System.out.println("Number of Potato: "+ potato);
-    int zucchini=Collections.frequency(itemsList, "zucchini"); 
-    discountGiver(zucchini);
-    System.out.println("Number of Zucchini: "+ zucchini);
-  }    
 }
