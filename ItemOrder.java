@@ -46,16 +46,13 @@ public class ItemOrder {
 	public int getCount() {
 		return count;
 	}
-	
-	// calculates and returns the ItemOrder's price
+	// calculates and returns the ItemOrder's total price
 	public double getOrderCost() {
 		if(item.getBulkCount() <= count) return item.getDiscountedPrice()*count;
 		return item.getPrice()*count;
 	}
-  // returns the item name and quantity as a string
-  public String toString() {
+	// returns the item name and quantity as a string
+  	public String toString() {
 		return "" + item + ": " + count;
 	}
-}
-	
 }
