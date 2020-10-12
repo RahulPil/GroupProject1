@@ -12,14 +12,14 @@ public class Client {
 		Set<Item> stock = new HashSet<Item>();
 		
 		// create 8 Item objects and adds them to the stock Set
-		stock.add(new Item("apple", 3.99, 0.50, 2));
-		stock.add(new Item("banana", 3.49, 0.25, 2));
-		stock.add(new Item("broccoli", 1.89, 0.20, 5));
-		stock.add(new Item("carrot", 0.99, 0.15, 4));
-		stock.add(new Item("oats", 8.99, 0.99, 4));
-		stock.add(new Item("potato", 0.40, 0.05, 9));
-		stock.add(new Item("zucchini", 0.76, 0.05, 5));
-		stock.add(new Item("orange", 0.49, .05, 6));
+		stock.add(new Item("Apple", 3.99, 0.50, 2));
+		stock.add(new Item("Banana", 3.49, 0.25, 2));
+		stock.add(new Item("Broccoli", 1.89, 0.20, 5));
+		stock.add(new Item("Carrot", 0.99, 0.15, 4));
+		stock.add(new Item("Oats", 8.99, 0.99, 4));
+		stock.add(new Item("Potato", 0.40, 0.05, 9));
+		stock.add(new Item("Zucchini", 0.76, 0.05, 5));
+		stock.add(new Item("Orange", 0.49, .05, 6));
 
 		System.out.println();
 		
@@ -27,6 +27,7 @@ public class Client {
 		System.out.println("To add items type 'add' and follow the prompts.");
 		System.out.println("To remove items type 'remove' and follow the prompts.");
 		System.out.println("To view the stock, type 'stocklist'.");
+		System.out.println("To view your cart, type 'cart'.");
 		System.out.println("Type 'exit' when you are done with entering items for purchase.");
 		System.out.println("--------------");
 		System.out.println("Currently in stock: " + stock);
@@ -73,7 +74,10 @@ public class Client {
 			}
 			//prints out available options
 			else if (input.equalsIgnoreCase("stocklist")){
-				System.out.println("stock: " + stock);
+				System.out.println("Stock: " + stock);
+			}
+			else if (input.equalsIgnoreCase("cart")) {
+				System.out.println("Cart: " + receipt);
 			}
 			else if (input.equalsIgnoreCase("exit")) break;
 			else {
