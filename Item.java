@@ -1,6 +1,14 @@
-//implements bulk discounts
-//constructor
+/* 
+ * Group Project #1
+ * Group 6 (Anders, Julian, Rahul, Rosie, Sean, Vatsal)
+ * CS 211
+ * Due: 10/12/2020
+ * Quarter: Fall 2020
+ * 
+ * Item class creates an Item object
+ */ 
 public class Item {
+	// field
 	private String name;
 	private double price; 
 	private double discount;
