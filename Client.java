@@ -92,15 +92,20 @@ public class Client {
 		System.out.println();
 		System.out.println("You purchased: ");
 		double total = 0.0;
+		double discount = 0.0;
 		for(ItemOrder order : receipt) {
 			int itemCount = order.getCount();
 			if (itemCount > 0) { //prints each item purchased, with the count and total item cost displayed
-				if (itemCount >= order.getItem().bulkCount) total += order.getItem().getDiscountedPrice()*itemCount;
-				else total += order.getItem().getPrice();
-				System.out.printf(order.getItem().getName() + "(" + itemCount + "): $%.2f", itemCount * order.getItem().getDiscountedPrice());
+				if (itemCount >= order.getItem().bulkCount) {
+					total += order.getItem().getDiscountedPrice()*itemCount;
+					discount += order.getItem().getDiscount()*itemCount;
+				}
+				else total += order.getItem().getPrice() * itemCount;
+				System.out.printf(order.getItem().getName() + "(" + itemCount + "): $%.2f", itemCount * order.getItem().getPrice());
 				System.out.println();
 			}
 		}
-		System.out.printf("Total cost: $%.2f", total);
+		System.out.printf("Total cost: $%.2f ", total);
+		System.out.printf("You saved: $%.2f", discount);
 	}
 }
