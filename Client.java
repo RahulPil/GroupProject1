@@ -53,7 +53,7 @@ public class Client {
 						System.out.println("Added " + count + " " + input);
 					}
 				}
-				if (!found) System.out.println("Invalid input, food not found.");
+				if (!found) System.out.println("Invalid input, food not found. Add or remove? ");
 			}
 			//handles removing items from receipt
 			else if (input.equalsIgnoreCase("remove")) {
