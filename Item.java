@@ -50,4 +50,10 @@ public class Item {
 	public int getBulkCount() {
 		return bulkCount;
 	}
+	public String toString() {
+		return name;
+	}
+	public boolean equals(Item item) {
+		return this.getName().equalsIgnoreCase(item.getName());
+	}
 }

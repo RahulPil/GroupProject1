@@ -8,129 +8,94 @@ public class Client {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		ArrayList<String> itemsList = new ArrayList<String>();
+		ArrayList<ItemOrder> receipt = new ArrayList<ItemOrder>();
+		Set<Item> stock = new HashSet<Item>();
 		
-		// create 8-10 Item objects
-		Item apple = new Item("apple", 3.99, 0.50, 2);
-		Item banana = new Item("banana", 3.49, 0.25, 2);
-		Item broccoli = new Item("broccoli", 1.89, 0.20, 5);
-		Item carrot = new Item("carrot", 0.99, 0.15, 4);
-		Item oats = new Item("oats", 8.99, 0.99, 4);
-		Item potato = new Item("potato", 0.40, 0.05, 9);
-		Item zucchini = new Item("zucchini", 0.76, 0.05, 5);
+		// create 8 Item objects and adds them to the stock Set
+		stock.add(new Item("apple", 3.99, 0.50, 2));
+		stock.add(new Item("banana", 3.49, 0.25, 2));
+		stock.add(new Item("broccoli", 1.89, 0.20, 5));
+		stock.add(new Item("carrot", 0.99, 0.15, 4));
+		stock.add(new Item("oats", 8.99, 0.99, 4));
+		stock.add(new Item("potato", 0.40, 0.05, 9));
+		stock.add(new Item("zucchini", 0.76, 0.05, 5));
+		stock.add(new Item("orange", 0.49, .05, 6));
 
-		System.out.println("");
-		
+		System.out.println();
 		
 		System.out.println("Welcome to the grocery!");
+		System.out.println("To add items type 'add' and follow the prompts.");
+		System.out.println("To remove items type 'remove' and follow the prompts.");
+		System.out.println("To view the stock, type 'stocklist'.");
 		System.out.println("Type 'exit' when you are done with entering items for purchase.");
 		System.out.println("--------------");
-		String input = "";
-		while(input.equals("exit") == false){
-         System.out.print("input: ");
-			String userinput = scan.nextLine();
-			input = userinput.toLowerCase();
-			System.out.println("You have entered: " + input);
-         
-         //itemsList.add(input);
-			if (input.equals("add")){
-            System.out.print("enter in item name: ");
-            userinput = scan.nextLine();
-			   input = userinput.toLowerCase();
-            System.out.println("You have entered: " + (input));
-   			   switch(input){
-   				case "apple":
-   				itemsList.add(apple.getName());
-   				break;
-   
-   				case "banana":
-   				itemsList.add(banana.getName());
-   				break;
-   
-   				case "broccoli":
-   				itemsList.add(broccoli.getName());
-   				break;
-   
-   				case "carrots":
-   				itemsList.add(carrots.getName());
-   				break;
-   
-   				case "oatmeal":
-   				itemsList.add(oats.getName());
-   				break;
-   
-   				case "potato":
-   				itemsList.add(potatos.getName());
-   				break;
-   
-   				case "zucchini":
-   				itemsList.add(zucchini.getName());
-   				break; 
-            }
+		System.out.println("Currently in stock: " + stock);
+		String input = scan.next();
+		while(!input.equals("exit")){
+			//handles adding new items to receipt
+			if (input.equalsIgnoreCase("add")) {
+				System.out.println("What would you like to add? ");
+				input = scan.next();
+				boolean found = false;
+				for (Item food : stock) {
+					if (food.getName().equalsIgnoreCase(input)) {
+						found = true;
+						System.out.println("How many would you like to add? ");
+						int count = scan.nextInt();
+						boolean inOrder = false;
+						for (ItemOrder order : receipt) {
+							if (order.getItem().getName().equalsIgnoreCase(input)) {
+								order.setCount(order.getCount()+count);
+								inOrder = true;
+							}
+						}
+						if (!inOrder) receipt.add(new ItemOrder(food,count));
+						System.out.println("Added " + count + " " + input);
+					}
+				}
+				if (!found) System.out.println("Invalid input, food not found.");
 			}
-         else if (input.equals("remove")){
-            System.out.print("enter in item name: ");
-            userinput = scan.nextLine();
-			   input = userinput.toLowerCase();
-            System.out.println("You have entered: " + (input));
-            switch(input){
-   				case "apple":
-   				itemsList.remove(apple.getName());
-   				break;
-   
-   				case "banana":
-   				itemsList.remove(banana.getName());
-   				break;
-   
-   				case "broccoli":
-   				itemsList.remove(broccoli.getName());
-   				break;
-   
-   				case "carrots":
-   				itemsList.remove(carrots.getName());
-   				break;
-   
-   				case "oatmeal":
-   				itemsList.remove(oats.getName());
-   				break;
-   
-   				case "potato":
-   				itemsList.remove(potatos.getName());
-   				break;
-   
-   				case "zucchini":
-   				itemsList.remove(zucchini.getName());
-   				break; 
-            }
-               
-         }
-         else if (input == "stocklist"){
-            System.out.println("stock: ");
-            
-            break;
-         }
-         
-         else{
-            System.out.println("invalid input");
-            
-         }
-			/*     private static void discountChecker(ArrayList<String> itemsList) {
-        int apple = Collections.frequency(itemsList, "apple");//checks to see how many "apples" there are
-        discountGiver(apple);
-        System.out.println("This is how many apples you have"+ apple);
-        int banana=Collections.frequency(itemsList, "banana");
-        int broccoli=Collections.frequency(itemsList, "broccoli");
-        int carrots=Collections.frequency(itemsList, "carrots");
-        int oatmeal=Collections.frequency(itemsList, "oatmeal");
-        int potato=Collections.frequency(itemsList, "potato");
-        int zucchini=Collections.frequency(itemsList, "zucchini"); */
-         
+			//handles removing items from receipt
+			else if (input.equalsIgnoreCase("remove")) {
+				System.out.println("What would you like to remove? ");
+				input = scan.next();
+				boolean found = false;
+				for (ItemOrder order : receipt) {
+					if (order.getItem().getName().equalsIgnoreCase(input)) {
+						found = true;
+						System.out.println("How many would you like to remove? ");
+						int count = scan.nextInt();
+						order.setCount(Math.max(order.getCount()-count,0));
+						System.out.println("Removed " + count + " " + input);
+					}
+				}
+				if (!found) System.out.println("Invalid input, food not found. Add or remove? ");
+			}
+			//prints out available options
+			else if (input.equalsIgnoreCase("stocklist")){
+				System.out.println("stock: " + stock);
+			}
+			else if (input.equalsIgnoreCase("exit")) break;
+			else {
+				System.out.println("Invalid input");
+			}
+			input = scan.next();
 		}
-      System.out.println("You have exited");
-      System.out.println();
-      System.out.println("Recipt:");
-      System.out.println(itemsList);
-      
+		System.out.println();
+		System.out.println("You have exited.");
+		System.out.println();
+		System.out.println("You purchased: ");
+		double total = 0.0;
+		for(ItemOrder order : receipt) {
+			int itemCount = order.getCount();
+			if (itemCount > 0) {
+				if (itemCount >= order.getItem().bulkCount) total += order.getItem().getDiscountedPrice()*itemCount;
+				else total += order.getItem().getPrice();
+				System.out.printf(order.getItem().getName() + "(" + itemCount + "): $%.2f", itemCount * order.getItem().getDiscountedPrice());
+				System.out.println();
+			}
+		}
+		System.out.printf("Total cost: $%.2f", total);
 		scan.close();
 	}
 }
