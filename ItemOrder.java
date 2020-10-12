@@ -45,5 +45,7 @@ public class ItemOrder {
 		if(item.getBulkCount() <= count) return item.getDiscountedPrice()*count;
 		return item.getPrice()*count;
 	}
-	
+	public String toString() {
+		return "" + item + ": " + count;
+	}
 }
