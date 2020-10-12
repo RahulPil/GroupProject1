@@ -36,16 +36,16 @@ public class Client {
 			if (input.equalsIgnoreCase("add")) {
 				System.out.println("What would you like to add? ");
 				input = scan.next();
-				boolean found = false;
+				boolean found = false; //tracks whether or not the item is in stock
 				for (Item food : stock) {
 					if (food.getName().equalsIgnoreCase(input)) {
 						found = true;
 						System.out.println("How many would you like to add? ");
 						int count = scan.nextInt();
-						boolean inOrder = false;
-						for (ItemOrder order : receipt) {
+						boolean inOrder = false; //tracks whether or not the item has already been ordered
+						for (ItemOrder order : receipt) { //searches the receipt for previous orders of the same item
 							if (order.getItem().getName().equalsIgnoreCase(input)) {
-								order.setCount(order.getCount()+count);
+								order.setCount(order.getCount()+count); //updates previous orders with new count
 								inOrder = true;
 							}
 						}
@@ -59,13 +59,13 @@ public class Client {
 			else if (input.equalsIgnoreCase("remove")) {
 				System.out.println("What would you like to remove? ");
 				input = scan.next();
-				boolean found = false;
+				boolean found = false; //tracks whether or not the item has already been ordered
 				for (ItemOrder order : receipt) {
 					if (order.getItem().getName().equalsIgnoreCase(input)) {
 						found = true;
 						System.out.println("How many would you like to remove? ");
 						int count = scan.nextInt();
-						order.setCount(Math.max(order.getCount()-count,0));
+						order.setCount(Math.max(order.getCount()-count,0)); //removes the given count from the previous order, with a minimum count of 0
 						System.out.println("Removed " + count + " " + input);
 					}
 				}
@@ -77,10 +77,12 @@ public class Client {
 			}
 			else if (input.equalsIgnoreCase("exit")) break;
 			else {
-				System.out.println("Invalid input");
+				System.out.println("Invalid input. Add or remove? ");
 			}
 			input = scan.next();
 		}
+		scan.close();
+		
 		System.out.println();
 		System.out.println("You have exited.");
 		System.out.println();
@@ -88,7 +90,7 @@ public class Client {
 		double total = 0.0;
 		for(ItemOrder order : receipt) {
 			int itemCount = order.getCount();
-			if (itemCount > 0) {
+			if (itemCount > 0) { //prints each item purchased, with the count and total item cost displayed
 				if (itemCount >= order.getItem().bulkCount) total += order.getItem().getDiscountedPrice()*itemCount;
 				else total += order.getItem().getPrice();
 				System.out.printf(order.getItem().getName() + "(" + itemCount + "): $%.2f", itemCount * order.getItem().getDiscountedPrice());
@@ -96,6 +98,5 @@ public class Client {
 			}
 		}
 		System.out.printf("Total cost: $%.2f", total);
-		scan.close();
 	}
 }
