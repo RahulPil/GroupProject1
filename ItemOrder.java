@@ -7,8 +7,7 @@
  * 
  * ItemOrder Class creates a ItemOrder object that represents a shopper's 
  * order in purchasing a item in a given quantity. 
-
-*/ 
+ */ 
 
 public class ItemOrder {
 	// field
@@ -20,7 +19,6 @@ public class ItemOrder {
 		this.item = item;
 		this.count = count;
 	}
-	
 	// deafult constructor
 	ItemOrder(Item item) {
 		this(item, 1);
@@ -41,16 +39,13 @@ public class ItemOrder {
 	public Item getItem() {
 		return item;
 	}
-	
 	// accessor for ItemOrder object's quantity
 	public int getCount() {
 		return count;
 	}
-	
-	// calculates and returns the ItemOrder's price
+	// method calculates and returns the ItemOrder's price
 	public double getOrderCost() {
 		if(item.getBulkCount() <= count) return item.getDiscountedPrice()*count;
 		return item.getPrice()*count;
 	}
-	
 }
