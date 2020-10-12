@@ -15,52 +15,62 @@ public class Item {
 	public int bulkCount;
 	
 	//CONSTRUCTORS
-	public Item() {
-		this("",0,0,0);
-	}
-    public Item(String name, double price, double discount, int bulkCount) {
+	// constructs item object
+    	public Item(String name, double price, double discount, int bulkCount) {
 		this.name = name; 
 		this.price = price;
 		this.discount = discount;
 		this.bulkCount = bulkCount;
 	}
-    public Item(String name, double price) {
-    	this(name,price,0,0);
-    }
-    
-    //SETTERS
-    public void setName(String name) {
+	// item default constructor
+	public Item() {
+		this("", 0, 0, 0);
+	}
+
+    	//SETTERS
+	// mutator sets the item object name
+    	public void setName(String name) {
 		this.name = name;
 	}
+	// mutator sets the item object price
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	// mutator sets the item object bulk discount amount
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
+	// mutator sets the item object bulk discount quantity requirement
 	public void setBulkCount(int bulkCount) {
 		this.bulkCount = bulkCount;
 	}
 	
 	//GETTERS
+	// accessor returns the item object name
 	public String getName() {
 		return name;
 	}
+	// accessor returns the item object price
 	public double getPrice() {
 		return price;
 	}
+	// accessor returns the item object bulk discount amount
 	public double getDiscount() {
 		return discount;
 	}
+	// accessor returns the item object price after discount
 	public double getDiscountedPrice() {
 		return this.price - this.discount;
 	}
+	// accessor returns the item object bulk discount quantity requirement
 	public int getBulkCount() {
 		return bulkCount;
 	}
+	// accessor returns the item object name
 	public String toString() {
 		return name;
 	}
+	// accessor returns boolean based on whether the item name is equal to another
 	public boolean equals(Item item) {
 		return this.getName().equalsIgnoreCase(item.getName());
 	}
