@@ -7,8 +7,7 @@
  * 
  * ItemOrder Class creates a ItemOrder object that represents a shopper's 
  * order in purchasing a item in a given quantity. 
-
-*/ 
+ */ 
 
 public class ItemOrder {
 	// field
