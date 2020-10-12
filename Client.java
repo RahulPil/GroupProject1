@@ -50,10 +50,10 @@ public class Client {
 							}
 						}
 						if (!inOrder) receipt.add(new ItemOrder(food,count));
-						System.out.println("Added " + count + " " + input);
+						System.out.println("Added " + count + " " + input + ". Add or remove more items? ");
 					}
 				}
-				if (!found) System.out.println("Invalid input, food not found. Add or remove? ");
+				if (!found) System.out.println("Invalid input, food not found. Add or remove more items? ");
 			}
 			//handles removing items from receipt
 			else if (input.equalsIgnoreCase("remove")) {
@@ -66,10 +66,10 @@ public class Client {
 						System.out.println("How many would you like to remove? ");
 						int count = scan.nextInt();
 						order.setCount(Math.max(order.getCount()-count,0)); //removes the given count from the previous order, with a minimum count of 0
-						System.out.println("Removed " + count + " " + input);
+						System.out.println("Removed " + count + " " + input + ". Add or remove more items? ");
 					}
 				}
-				if (!found) System.out.println("Invalid input, food not found. Add or remove? ");
+				if (!found) System.out.println("Invalid input, food not found. Add or remove more items? ");
 			}
 			//prints out available options
 			else if (input.equalsIgnoreCase("stocklist")){
@@ -77,7 +77,7 @@ public class Client {
 			}
 			else if (input.equalsIgnoreCase("exit")) break;
 			else {
-				System.out.println("Invalid input. Add or remove? ");
+				System.out.println("Invalid input. Add or remove more items? ");
 			}
 			input = scan.next();
 		}
