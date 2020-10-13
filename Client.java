@@ -8,6 +8,7 @@
  * ShoppingCart class runs as a client to the Item and ItemOrder classes.
  * The class takes input from the user for the items and quantity, 
  * and prints out the reciept which includes total, price, and items. 
+ */
 
 import java.util.*;
 public class Client {
