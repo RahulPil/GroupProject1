@@ -66,7 +66,7 @@ public class Item {
 	public int getBulkCount() {
 		return bulkCount;
 	}
-	// accessor returns the item object name
+	// accessor returns the item object name as a string
 	public String toString() {
 		return name;
 	}
