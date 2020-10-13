@@ -27,6 +27,10 @@ public class Item {
 	public Item() {
 		this("", 0, 0, 0);
 	}
+	// item consturctor without discount or bulkCount
+   	public Item(String name, double price){
+   	this(name, price, 0, 0); 
+   	}
 
     	//SETTERS
 	// mutator sets the item object name
