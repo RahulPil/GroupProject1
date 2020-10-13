@@ -1,11 +1,18 @@
-//make a loop that takes what the user wants 
-//loop exits when keyword is pressed 
-//prints out the reciept which includes total, price, and items. 
-
+/* 
+ * Group Project #1
+ * Group 6 (Anders, Julian, Rahul, Rosie, Sean, Vatsal)
+ * CS 211
+ * Due: 10/12/2020
+ * Quarter: Fall 2020
+ * 
+ * ShoppingCart class runs as a client to the Item and ItemOrder classes.
+ * The class takes input from the user for the items and quantity, 
+ * and prints out the reciept which includes total, price, and items. 
 
 import java.util.*;
 public class Client {
-
+	
+	// main method
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		ArrayList<ItemOrder> receipt = new ArrayList<ItemOrder>();
@@ -22,7 +29,7 @@ public class Client {
 		stock.add(new Item("Orange", 0.49, .05, 6));
 
 		System.out.println();
-		
+		// prints user instructions and stock
 		System.out.println("Welcome to the grocery!");
 		System.out.println("To add items type 'add' and follow the prompts.");
 		System.out.println("To remove items type 'remove' and follow the prompts.");
@@ -31,6 +38,8 @@ public class Client {
 		System.out.println("Type 'exit' when you are done with entering items for purchase.");
 		System.out.println("--------------");
 		System.out.println("Currently in stock: " + stock);
+		
+		// while loop that takes user input using scanner
 		String input = scan.next();
 		while(!input.equals("exit")){
 			//handles adding new items to receipt
