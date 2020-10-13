@@ -5,7 +5,8 @@
  * Due: 10/12/2020
  * Quarter: Fall 2020
  * 
- * Item class creates an Item object
+ * Item class creates an Item object which includes the item's
+ * name, price,  bulk discount amount, and bulk discount quantity requirement.
  */ 
 public class Item {
 	// field
